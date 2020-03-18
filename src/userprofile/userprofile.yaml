@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofile
+  labels:
+    app: userprofile
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userprofile
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      containers:
+      - name: userprofile
+        image: registryyle9462.azurecr.io/tripsinsights/userprofile:1.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userprofile
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: userprofile
