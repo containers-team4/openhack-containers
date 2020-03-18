@@ -28,6 +28,8 @@ spec:
           value: "sqlserveryle9462.database.windows.net"
         - name: SQL_DBNAME
           value: "mydrivingDB"
+        - name: PORT
+          value: "80"
 ---
 apiVersion: v1
 kind: Service
