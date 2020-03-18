@@ -19,6 +19,23 @@ spec:
         image: registryyle9462.azurecr.io/tripsinsights/userprofile:1.0
         ports:
         - containerPort: 80
+        env:
+        - name: SQL_USER
+          value: "sqladminyLe9462"
+        - name: SQL_PASSWORD
+          value: "aT8ip2Ve8"
+        - name: SQL_SERVER
+          value: "sqlserveryle9462.database.windows.net"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
+        - name: WEB_PORT
+          value: "80"
+        - name: WEB_SERVER_BASE_URI
+          value: "http://0.0.0.0"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Local"
+        - name: CONFIG_FILES_PATH
+          value: "/secrets"
 ---
 apiVersion: v1
 kind: Service
