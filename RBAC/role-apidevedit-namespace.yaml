@@ -4,11 +4,6 @@ metadata:
   name: api-dev-edit-access
   namespace: api
 rules:
-- apiGroups: ["", "extensions", "apps"]
+- apiGroups: [""]
   resources: ["*"]
-  verbs: ["*"]
-- apiGroups: ["batch"]
-  resources:
-  - jobs
-  - cronjobs
   verbs: ["*"]
