@@ -1,25 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-java
+  name: trips
   labels:
-    app: user-java
+    app: trips
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-java
+      app: trips
   template:
     metadata:
       labels:
-        app: user-java
+        app: trips
     spec:
       containers:
-      - name: user-java
-        image: registryyle9462.azurecr.io/tripinsights/user-java:1.0
+      - name: trips
+        image: registryyle9462.azurecr.io/tripinsights/trips:1.0
         ports:
         - containerPort: 80
+          name: trips
         env:
+        - name: PORT
+          value: "80"
+        - name: CONFIG_FILES_PATH
+          value: "/secrets"
         - name: SQL_USER
           value: "sqladminyLe9462"
         - name: SQL_PASSWORD
@@ -28,18 +33,20 @@ spec:
           value: "sqlserveryle9462.database.windows.net"
         - name: SQL_DBNAME
           value: "mydrivingDB"
-        - name: PORT
-          value: "80"
+        - name: OPENAPI_DOCS_URL
+          value: "http://changeme"
+        - name: DEBUG_LOGGING
+          value: "false"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-java
+  name: trips
   annotations:
-  service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
   type: LoadBalancer
   ports:
   - port: 80
   selector:
-    app: user-java
+    app: trips
