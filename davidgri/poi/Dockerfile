@@ -1,6 +1,6 @@
-#
+# 
 # builder - first stage to build the application
-#
+# 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
 WORKDIR /app
 
@@ -35,9 +35,9 @@ COPY ./web/appsettings.json /app/web/out/
 
 # ------------------------------------------------
 
-#
+# 
 # runtime - build final runtime image
-#
+# 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.6-alpine3.9
 
 ARG IMAGE_CREATE_DATE
@@ -45,8 +45,8 @@ ARG IMAGE_VERSION
 ARG IMAGE_SOURCE_REVISION
 
 ENV SQL_USER="sa" \
-    SQL_PASSWORD="aT8ip2Ve8" \
-    SQL_SERVER="sql1" \
+    SQL_PASSWORD="aVMp0ll0PWpadd11" \
+    SQL_SERVER="sqlDrivingDb3" \
     SQL_DBNAME="mydrivingDB" \
     WEB_PORT=80 \
     WEB_SERVER_BASE_URI="http://0.0.0.0" \
@@ -64,7 +64,7 @@ LABEL org.opencontainers.image.title="Trip Insights - POI (Points Of Interest) A
       org.opencontainers.image.vendor="Microsoft" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.source="https://github.com/Azure-Samples/openhack-containers.git" \
-      org.opencontainers.image.revision=$IMAGE_SOURCE_REVISION
+      org.opencontainers.image.revision=$IMAGE_SOURCE_REVISION 
 
 # add debugging utilities
 RUN apk --no-cache add \
@@ -83,3 +83,4 @@ COPY --from=publish /app/web/out .
 # run application
 EXPOSE $WEB_PORT
 ENTRYPOINT ["dotnet", "poi.dll"]
+
