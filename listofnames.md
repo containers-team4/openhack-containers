@@ -1,3 +1,0 @@
-Dave Baker
-richeney
-davidgri
