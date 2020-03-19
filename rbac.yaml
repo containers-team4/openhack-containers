@@ -1,0 +1,96 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: api-edit-access
+  namespace: api
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: web-view-access
+  namespace: web
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: api-access-edit
+  namespace: api
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: api-edit-access
+subjects:
+- kind: Group
+  namespace: api
+  name: 211f7021-d9e8-49c6-9cef-d2c868c6f350 # API Dev Security Group objectId
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: web-access-view
+  namespace: web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-view-access
+subjects:
+- kind: Group
+  namespace: web
+  name: 211f7021-d9e8-49c6-9cef-d2c868c6f350 # API Dev Security Group objectId
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: web-edit-access
+  namespace: web
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: api-view-access
+  namespace: api
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: web-access-edit
+  namespace: web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-edit-access
+subjects:
+- kind: Group
+  namespace: web
+  name: 7a31211f-632f-4703-93ee-8c8fbfecdc3e # Web Dev Security Group objectId
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: api-access-view
+  namespace: api
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: api-view-access
+subjects:
+- kind: Group
+  namespace: api
+  name: 7a31211f-632f-4703-93ee-8c8fbfecdc3e # Web Dev Security Group objectId
+---
