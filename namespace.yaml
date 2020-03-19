@@ -1,0 +1,7 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: insurance
+  labels:
+    name: insurance
+    istio-injection: enabled
