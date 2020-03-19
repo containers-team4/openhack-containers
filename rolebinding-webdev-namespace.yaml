@@ -1,0 +1,29 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: web-dev-access
+  namespace: web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: api-web-view-access
+subjects:
+- kind: Group
+  namespace: web
+  name: groupObjectId #replace this
+
+--- 
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: web-dev-access
+  namespace: web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-dev-edit-access
+subjects:
+- kind: Group
+  namespace: web
+  name: groupObjectId #replace this
