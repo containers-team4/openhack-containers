@@ -1,12 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: tripviewer
+  name: gord-tripviewer
   annotations:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: tripviewer.20.191.41.8.nip.io
+  - host: tripinsights.20.191.41.8.nip.io
     http:
       paths:
       - backend:

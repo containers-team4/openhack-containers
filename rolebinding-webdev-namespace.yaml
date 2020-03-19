@@ -10,7 +10,7 @@ roleRef:
 subjects:
 - kind: Group
   namespace: web
-  name: 7a31211f-632f-4703-93ee-8c8fbfecdc3e #replace this
+  name: 211f7021-d9e8-49c6-9cef-d2c868c6f350 #replace this
 --- 
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
