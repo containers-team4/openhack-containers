@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tripviewer
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: tripviewer.20.191.41.8.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: tripviewer
+          servicePort: 80
+        path: /
