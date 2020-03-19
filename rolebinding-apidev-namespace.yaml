@@ -1,7 +1,7 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: api-dev-access
+  name: api-dev-access-view
   namespace: api
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -10,12 +10,12 @@ roleRef:
 subjects:
 - kind: Group
   namespace: api
-  name: groupObjectId #replace this
+  name: 211f7021-d9e8-49c6-9cef-d2c868c6f350 #replace this
 --- 
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: api-dev-access
+  name: api-dev-access-edit
   namespace: api
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -24,4 +24,4 @@ roleRef:
 subjects:
 - kind: Group
   namespace: api
-  name: groupObjectId #replace this
+  name: 211f7021-d9e8-49c6-9cef-d2c868c6f350 #replace this
