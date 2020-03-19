@@ -16,9 +16,14 @@ spec:
         app: insurance
     spec:
       containers:
-      - image: "replaceme.io/insurance:1.0"
+      - image: "registryyle9462.azurecr.io/insurance:1.0"
         imagePullPolicy: Always
         name: insurance
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            memory: 256Mi
         ports:
         - containerPort: 8081
           name: http
@@ -28,6 +33,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: insurance
+  namespace: insurance
 spec:
   type: ClusterIP
   selector:
