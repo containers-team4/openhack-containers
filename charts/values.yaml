@@ -1,4 +1,7 @@
 #remember - these bad boys override the values in the sub-charts
+
+ingressControllerIP: 20.191.41.8  #this needs to be changed for the external ip for your cluster
+
 poi:
   replicaCount: 2
 
@@ -10,3 +13,28 @@ poi:
 
 tripviewer:
   replicaCount: 2
+
+user-profile:
+  sqlConfig:
+    SQL_USER: "sqladminyLe9462"
+    SQL_PASSWORD: "aT8ip2Ve8"
+    SQL_SERVER: "sqlserveryle9462.database.windows.net"
+    SQL_DBNAME: "mydrivingDB"
+
+trips:
+  replicaCount: 2
+
+  sqlConfig:
+    SQL_USER: "sqladminyLe9462"
+    SQL_PASSWORD: "aT8ip2Ve8"
+    SQL_SERVER: "sqlserveryle9462.database.windows.net"
+    SQL_DBNAME: "mydrivingDB"
+
+user-java:
+  replicaCount: 2
+
+  sqlConfig:
+    SQL_USER: "sqladminyLe9462"
+    SQL_PASSWORD: "aT8ip2Ve8"
+    SQL_SERVER: "sqlserveryle9462.database.windows.net"
+    SQL_DBNAME: "mydrivingDB"
