@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: trips
+  namespace: api
   labels:
     app: trips
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: trips
@@ -17,6 +18,10 @@ spec:
       containers:
       - name: trips
         image: registryyle9462.azurecr.io/tripinsights/trips:1.0
+        volumeMounts:
+        - name: test
+          mountPath: /kvmnt
+          readOnly: true
         ports:
         - containerPort: 80
           name: trips
@@ -24,24 +29,35 @@ spec:
         - name: PORT
           value: "80"
         - name: CONFIG_FILES_PATH
-          value: "/secrets"
-        - name: SQL_USER
-          value: "sqladminyLe9462"
-        - name: SQL_PASSWORD
-          value: "aT8ip2Ve8"
-        - name: SQL_SERVER
-          value: "sqlserveryle9462.database.windows.net"
-        - name: SQL_DBNAME
-          value: "mydrivingDB"
+          value: "/kvmnt"
         - name: OPENAPI_DOCS_URL
           value: "http://changeme"
         - name: DEBUG_LOGGING
           value: "false"
+
+      volumes:
+        - name: test
+          flexVolume:
+            driver: "azure/kv"
+            secretRef:
+              name: kvcreds                             # [OPTIONAL] not required if using Pod Identity
+            options:
+                  usepodidentity: "false"        # [OPTIONAL] if not provided, will default to "false"
+                  keyvaultname: "openhack-team4-kv"               # the name of the KeyVault
+                  keyvaultobjectnames: "SQL-SERVER;SQL-USER;SQL-PASSWORD;SQL-DBNAME"    # list of KeyVault object names (semi-colon separated)
+                  keyvaultobjectaliases: "SQL_SERVER;SQL_USER;SQL_PASSWORD;SQL_DBNAME"  # filenames to use when writing the objects
+                  keyvaultobjecttypes: "secret;secret;secret;secret"  # list of KeyVault object types: secret, key or cert (semi-colon separated)
+                  keyvaultobjectversions: ""     # [OPTIONAL] list of KeyVault object versions (semi-colon separated), will get latest if empty
+                  resourcegroup: "teamResources"              # [REQUIRED FOR < v0.0.14] the resource group of the KeyVault
+                  subscriptionid: "19edb7df-8d8d-486d-afa0-97216834ec8f"             # [REQUIRED FOR < v0.0.14] the subscription ID of the KeyVault
+                  tenantid: "01228752-91ea-4355-9ec3-45574aa23dcb"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: trips
+  namespace: api
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
