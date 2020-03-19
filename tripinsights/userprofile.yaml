@@ -34,7 +34,7 @@ spec:
         - name: CONFIG_FILES_PATH
           value: "/kvmnt"
       volumes:
-        - name: sqlconn
+        - name: test
           flexVolume:
             driver: "azure/kv"
             secretRef:
